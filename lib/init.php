@@ -82,13 +82,15 @@ class WDS_CMB2_User_Select {
 	 * Adds JS to footer which enables the autocomplete
 	 */
 	public static function footer_js() {
-		wp_localize_script( 'jquery-ui-autocomplete', 'cmb2_user_select_field', array(
+		$options = array(
 			'field_ids' => self::$script_data,
 			'ajax_url'  => admin_url( 'admin-ajax.php' ),
-		) );
+		);
 
 		?>
 		<script type="text/javascript">
+		window.cmb2_user_select_field = <?php echo json_encode( $options ) ?>;
+
 		jQuery(document).ready( function($) {
 			var l10n = window.cmb2_user_select_field;
 
